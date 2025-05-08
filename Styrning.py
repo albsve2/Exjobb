@@ -15,9 +15,9 @@ def send_urscript(command: str):
         print("Error:", e)
 
 # Stegvis styrning
-#send_urscript("movel(p[0.42261, -0.05421, 0.257, 1.8392, -2.5593, 0.0072], a=0.5, v=0.25)")
+send_urscript("movel(p[0.25555,-0.06814,0.12354,3.186,-0.124,0], a=1.2, v=3.3)")
 #time.sleep(1.0)
-send_urscript("set_digital_out(1, True)")
+#send_urscript("set_digital_out(1, True)")
 #time.sleep(0.5)
 #send_urscript("set_digital_out(2, False)")
 #send_urscript("set_digital_out(7, True)")
