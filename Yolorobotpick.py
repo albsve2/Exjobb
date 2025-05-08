@@ -51,7 +51,7 @@ model = model.to("cuda")
 
 # Robot positions
 RX, RY, RZ = 3.186, -0.124, 0.106
-HOME = "movel(p[0.25555,-0.06814,0.12354,3.186,-0.124,0], a=1.2, v=0.3)"
+HOME = "movel(p[0.34677,-0.13007,0.12600,3.186,-0.124,0], a=1.2, v=0.3)"
 SMALL_DROP = "movel(p[0.30145,-0.15804,0.23,2.592,-1.979,0], a=1.2, v=0.3)"
 MEDIUM_DROP = "movel(p[0.22736,-0.11185,0.23,2.592,-1.979,0], a=1.2, v=0.3)"
 
@@ -80,8 +80,7 @@ def robot_task(cx, cy, cls):
     print(f"\n Kör robotsekvens till x={x_mm:.1f}, y={y_mm:.1f}, klass={int(cls)}")
 
     sequence = [
-        (f"movel(p[{x_m:.5f},{y_m:.5f},0.15,{RX},{RY},{RZ}], a=2.5, v=1.0)", 1.0),
-        (f"movel(p[{x_m:.5f},{y_m:.5f},0.12,{RX},{RY},{RZ}], a=2.5, v=1.0)", 1.0),
+        (f"movel(p[{x_m:.5f},{y_m:.5f},0.12,{RX},{RY},{RZ}], a=2.5, v=2.0)", 1.0),
         (f"movel(p[{x_m:.5f},{y_m:.5f},{z_approach:.5f},{RX},{RY},{RZ}], a=0.2, v=0.2)", 1.2),
         (f"movel(p[{x_m:.5f},{y_m:.5f},{z_pick:.5f},    {RX},{RY},{RZ}], a=0.1, v=0.05)", 1.5),
         ("set_digital_out(1, True)", 0.5),
