@@ -4,6 +4,11 @@ import numpy as np
 import pathlib
 import warnings
 import os
+import socket
+import time
+
+robotIP = "130.130.130.86"
+PORT = 30001
 
 # ── Tysta amp.autocast‑varningar ───────────────────────────────────────────────
 warnings.filterwarnings(
@@ -34,6 +39,20 @@ cap.set(cv2.CAP_PROP_FPS         , 30)
 if not cap.isOpened():
     raise RuntimeError("Kunde inte öppna kameran.")
 
+def send_urscript(command: str):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((robotIP, PORT))
+        s.sendall((command + "\n").encode('utf-8'))
+        s.close()
+        print(f"Sent: {command}")
+    except Exception as e:
+        print("Error:", e)
+
+
+send_urscript("set_analog_out(0, 0.5)")
+
+
 try:
     while True:
         ret, frame = cap.read()
@@ -61,9 +80,6 @@ try:
             cx = int((x1 + x2) / 2)
             cy = int((y1 + y2) / 2)
 
-            # skriv ut i terminal
-            print(f"Batteri klass={int(cls)}, conf={conf:.2f}")
-            print(f"  Pixel (cx,cy)=({cx},{cy})\n")
 
             # markera på bilden
             cv2.circle(annotated, (cx, cy), 8, (0,255,0), -1)
@@ -76,6 +92,11 @@ try:
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
+
+
+
 finally:
     cap.release()
     cv2.destroyAllWindows()
+    send_urscript("set_analog_out(0, 0)")
+
