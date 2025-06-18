@@ -1,0 +1,7 @@
+train: /Users/albinsvensson/Desktop/EXJOBB/Dataset/Images/train
+val: /Users/albinsvensson/Desktop/EXJOBB/Dataset/Images/val
+test: /Users/albinsvensson/Desktop/EXJOBB/Dataset/Images/test  # om du har en test-mapp
+
+nc: 5  # antalet klasser
+names: ['LR41', 'LR44', 'CR2032', 'AA', 'AAA']
+
